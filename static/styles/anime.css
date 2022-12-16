@@ -1,0 +1,115 @@
+video {
+    margin-top: 3rem;
+    max-height: 800px;
+    width: 100%;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 30px;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+}
+
+p {
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 2em;
+}
+
+button.active {
+    border: none;
+    height: 45px;
+    width: 60px;
+    border-radius: 50px;
+    background-color: #5c64cb;
+    color: #f6f6f6;
+    font-weight: 600;
+    font-size: 16px;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+button {
+    height: 45px;
+    width: 60px;
+    border-radius: 50px;
+    border: solid 2px #5c64cb;
+    color: #5c64cb;
+    font-weight: 600;
+    font-size: 16px;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* .ep {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.sode{
+    width: 60px;
+    margin-bottom: 10px;
+} */
+
+/* @media (max-width: 1110px) {
+    .ep{
+        grid-template-columns: repeat(10, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .ep{
+        grid-template-columns: repeat(8, 1fr);
+    }
+} */
+
+
+@media (max-width: 900px) {
+    .title {
+        font-size: 24px;
+    }
+    
+    p {
+        font-size: 14px;
+    }
+
+    button {
+        height: 40px;
+        width: 55px;
+        font-size: 14px;
+    }
+
+    button.active{
+        height: 40px;
+        width: 55px;
+        font-size: 14px;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 20px;
+    }
+    
+    p {
+        font-size: 12px;
+    }
+
+    button{
+        width: 50px;
+        height: 35px;
+        font-size: 12px;
+    }
+
+
+    button.active{
+        width: 50px;
+        height: 35px;
+        font-size: 12px;
+    }
+
+}
