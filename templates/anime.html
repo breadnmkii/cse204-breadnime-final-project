@@ -21,9 +21,13 @@
             </a>
         </div>
         <div class="leftnav">
-            <input type="text" placeholder="Search" class="search">
-            <input type="submit" value="GO!" class="button">
-            <input type="button" value="Random" class="rando">
+            <div class="search-wrapper">
+                <form id="search">
+                    <input type="text" placeholder="Search" id="anime-search" class="search">
+                    <input type="submit" value="GO!" class="button">
+                    <input type="button" value="Random" class="rando">
+                </form>
+            </div>
         </div>
     </nav>
 
@@ -34,7 +38,7 @@
                 <source src="movie.ogg" type="video/ogg">
             </video>
             <p class="title">TITLE</p>
-            <p>
+            <p id="ani-description">
                 DESCRIPTION
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
@@ -60,45 +64,6 @@
             <button>EP 1</button>
         </div>
 
-        <!-- <div class="ep">
-            <div class="sode">
-                <button class="active">EP 1</button>
-            </div>
-            <div class="sode">
-                <button>EP 1</button>
-            </div>
-            <div class="sode">
-                <button>EP 1</button>
-            </div>
-            <div class="sode">
-                <button>EP 1</button>
-            </div>
-            <div class="sode">
-                <button>EP 1</button>
-            </div>
-            <div class="sode">
-                <button>EP 1</button>
-            </div>
-            <div class="sode">
-                <button>EP 1</button>
-            </div>
-            <div class="sode">
-                <button>EP 1</button>
-            </div>
-            <div class="sode">
-                <button>EP 1</button>
-            </div>
-            <div class="sode">
-                <button>EP 1</button>
-            </div>
-            <div class="sode">
-                <button>EP 1</button>
-            </div>
-            <div class="sode">
-                <button>EP 1</button>
-            </div>
-        </div> -->
-
     </section>
 
     <footer>
@@ -110,7 +75,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../static/scripts/view.js"></script>
-
+    <script src="../static/scripts/search.js"></script>
 </body>
 
 </html>

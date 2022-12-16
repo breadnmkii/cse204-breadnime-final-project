@@ -3,7 +3,6 @@
 var renderAPI = {
     renderTrendingCarousel: function(data) {
         console.log("Rendering trending carousel...");
-        console.log(data);
         for (let ani in data) {
             console.log(data[ani]);
             let currAni = data[ani];
@@ -19,7 +18,6 @@ var renderAPI = {
                     `
                 }),
                 click: () => {
-                    alert(`u clicked on ${currAni['animeTitle']}`);
                     searchAPI.openAnime(currAni);
                 }
             }).appendTo('.carousel');
@@ -27,6 +25,24 @@ var renderAPI = {
 
     },
     renderAnimeGallery: function(data) {
+        console.log("Rendering anime gallery...");
+        $('#result-header').text(`Search Results: ${localStorage.getItem("searchName")}`);
+        for (let ani in data) {
+            console.log(data[ani]);
+            let currAni = data[ani];
+            $('<div/>', {
+                class: "imggall",
+                html: `
+                <div class="img">                           \
+                    <img src="${currAni['animeImg']}">      \
+                </div>                                      \
+                <h4>${currAni['animeTitle']}</h4>           \
+                `,
+                click: () => {
+                    searchAPI.openAnime(currAni);
+                }
+            }).appendTo('.gallery');
+        }
         /*
         <div class="imggall">
             <img src="https://i.pinimg.com/originals/4c/3d/14/4c3d14aac7a9ea327d0a080c8c2a1278.jpg">
@@ -35,7 +51,21 @@ var renderAPI = {
         */
     },
     renderAnimeStream: function(data) {
+        console.log("Rendering anime stream...");
+        console.log(localStorage.getItem("openAnime"));
 
+        let ani = JSON.parse(localStorage.getItem("openAnime"));
+        let aniDetails = JSON.parse(localStorage.getItem("openAnimeDetails"));
+        const title = ani.animeTitle;
+        const synopsis = aniDetails.synopsis;
+        const eps = aniDetails.episodesList;
+
+        $('.title').text(title);
+        $('#ani-description').text(synopsis);
+        for (let ep in eps) {
+            let currEp = eps[ep];
+            console.log(currEp);
+        }
     }
 }
 

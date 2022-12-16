@@ -14,9 +14,11 @@ let searchAPI = {
             window.location.href = "gallery.html";
         });
     },
-    openAnime: function(data) {    // Function for redirecting to specific anime JSON object
+    openAnime: async function(data) {    // Function for redirecting to specific anime JSON object
         console.log("Opening anime...");
+        let animeDetails = await this.getAnimeDetails(data.animeId);
         localStorage.setItem("openAnime", JSON.stringify(data));
+        localStorage.setItem("openAnimeDetails", JSON.stringify(animeDetails));
         window.location.href = "anime.html"
     },
     getSearchAnime: function() {    // Function for getting searched anime data
@@ -46,13 +48,15 @@ let searchAPI = {
         }
         return undefined;
     },
-    getAnimeDetails: function(animeID) {
-        fetch(`https://gogoanime.consumet.org/anime-details/${animeID}`)
+    getAnimeDetails: async function(animeID) {
+        let animeDetails_res = fetch(`https://gogoanime.consumet.org/anime-details/${animeID}`)
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
             return data;
         });
+        
+        return animeDetails_res;
     },
 }
 
@@ -61,6 +65,7 @@ $('#search').submit(e => {
     e.preventDefault();
     const searchInput = $('#anime-search').val();
     searchAPI.searchAnime(searchInput);
+    localStorage.setItem("searchName", searchInput);
     return false;
 });
 
