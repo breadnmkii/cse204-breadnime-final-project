@@ -27,13 +27,47 @@ var renderAPI = {
 
     },
     renderAnimeGallery: function(data) {
-
+        /*
+        <div class="imggall">
+            <img src="https://i.pinimg.com/originals/4c/3d/14/4c3d14aac7a9ea327d0a080c8c2a1278.jpg">
+            <h4>TITLE</h4>
+        </div>
+        */
     },
     renderAnimeStream: function(data) {
 
     }
 }
 
+
+/* Event listeners */
+// Listener for carousel button interaction
+// Concept: gets width of carousel item, sets scrollLeft to increment/decrement by width
+$('.sub-content button').click((e) => {
+    // temporarily disable snapping and button
+    $('.carousel').css("scroll-snap-type","none");
+
+    let item_width = $('.carousel-item').width() + 44;
+
+    step = 2;
+    speed = 5;
+    scrollAmount = 0;
+    var scrollTimer = setInterval(function(){
+        let currScroll = $('.carousel').scrollLeft();
+        console.log(scrollAmount);
+        if(e.target.id === "left-carousel"){
+            $('.carousel').scrollLeft(currScroll -= step);
+        } else {
+            $('.carousel').scrollLeft(currScroll += step);
+        }
+        scrollAmount += step;
+        if(scrollAmount >= item_width){
+            window.clearInterval(scrollTimer);
+            // reenable snapping
+            $('.carousel').css("scroll-snap-type","x mandatory");
+        }
+    }, speed);
+})
 
 /*
 <div class="carousel-item">
