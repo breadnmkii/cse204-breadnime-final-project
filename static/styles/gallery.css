@@ -1,6 +1,6 @@
 .gallery{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     list-style: none;
     margin-right: auto;
     margin-left: auto;
@@ -10,7 +10,7 @@
 
 .imggall{
     width: 80%;
-    padding-bottom: 2em;
+    padding-bottom: 2rem;
     margin-right: auto;
     margin-left: auto;
 }
@@ -21,3 +21,4 @@
     margin-right: auto;
     margin-left: auto;
 }
+
