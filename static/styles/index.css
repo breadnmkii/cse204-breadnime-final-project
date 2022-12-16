@@ -54,7 +54,6 @@ button{
 }
 
 .carousel-item {
-    height: 50vh;
     margin-right: 1.5rem;
     margin-left: 1.5rem;
 }
@@ -68,7 +67,7 @@ button{
     margin-bottom: 1em;
 }
 .img img{
-    height: 40vh;
+    width: 20vh;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
