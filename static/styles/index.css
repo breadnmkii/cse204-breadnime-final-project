@@ -83,3 +83,16 @@ button{
     scrollbar-width: none;
     /* Firefox */
 }
+
+@media (max-width: 600px) {
+    button img{
+        width: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    button img{
+        width: 20px;
+    }
+}
+

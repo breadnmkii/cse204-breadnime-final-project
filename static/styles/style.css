@@ -99,3 +99,99 @@ footer {
     opacity: 0.5;
     margin-bottom: 3rem;
 }
+
+@media (max-width: 900px) {
+    input.search {
+        width: 200px;
+    }
+    h3 {
+        font-size: 40px;
+    }
+    
+    h4 {
+        font-size: 16px;
+    }
+    
+    h5 {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    nav img {
+        width: 45px;
+    }
+    
+    input.search {
+        width: 150px;
+        height: 40px;
+        font-size: 14px;
+    }
+    
+    .button {
+       width: 45px;
+       height: 40px;
+       font-size: 14px;
+    }
+    
+    .rando {
+        height: 40px;
+        width: 80px;
+        font-size: 14px;
+    }
+    h3 {
+        font-size: 30px;
+    }
+    
+    h4 {
+        font-size: 16px;
+    }
+    
+    h5 {
+        font-size: 16px;
+    }
+    h6 {
+        font-size: 10px;
+    }
+    
+    h7 {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav img {
+        width: 35px;
+    }
+    
+    input.search {
+        width: 100px;
+        height: 30px;
+        font-size: 12px;
+    }
+    
+    .button {
+       width: 35px;
+       height: 30px;
+       font-size: 12px;
+    }
+    
+    .rando {
+        height: 30px;
+        width: 65px;
+        font-size: 12px;
+    }
+
+    h3 {
+        font-size: 25px;
+    }
+    
+    h4 {
+        font-size: 14px;
+    }
+    
+    h5 {
+        font-size: 12px;
+    }
+
+}
