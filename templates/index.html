@@ -12,48 +12,23 @@
     <body>
         <section>
             <div class="main-content">
-                <h3>Ad free anime, really!</h3>
+                <h3>breadnime</h3>
+                <h4>Ad free anime, really!</h4>
                 <div class="search-wrapper">
                     <form id="search">
-                        <input type="text" placeholder="Search" class="search">
+                        <input type="text" placeholder="Search" id="anime-search" class="search">
                         <input type="submit" value="GO!" class="button">
                     </form>
                 </div>
             </div>
             <div id="intro-text">
-                <h5>
-                    Ads are bad.
-                    Fortunately, this website is here for you.
-                    Enjoy streaming thousands of anime to watch and click anywhere stress (crtl+w) free.
-                </h5>
+                <h4>
+                    Enjoy streaming thousands of anime and click anywhere stress (crtl+w) free.
+                </h4>
             </div>
             <div class="sub-content">
                 <div class="carousel">
                     <!-- Populate with jquery for popular anime -->
-                    <div class="carousel-item">
-                        <div class="mainview">
-                            <div class="img">
-                                <img src="https://i.pinimg.com/originals/4c/3d/14/4c3d14aac7a9ea327d0a080c8c2a1278.jpg">
-                            </div>
-                            <p>TITLE</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="mainview">
-                            <div class="img">
-                                <img src="https://i.pinimg.com/originals/4c/3d/14/4c3d14aac7a9ea327d0a080c8c2a1278.jpg">
-                            </div>
-                            <p>TITLE</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="mainview">
-                            <div class="img">
-                                <img src="https://i.pinimg.com/originals/4c/3d/14/4c3d14aac7a9ea327d0a080c8c2a1278.jpg">
-                            </div>
-                            <p>TITLE</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -69,5 +44,15 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="../static/scripts/search.js"></script>
         <script src="../static/scripts/view.js"></script>
+        <script>
+            // On page load get popular anime
+            $(document).ready(() => {
+                // Initialize popular anime
+                searchAPI.getPopular();
+
+                // Render dynamic views
+                renderAPI.renderTrendingCarousel(searchAPI.getPopular());
+            });
+        </script>
     </body>
 </html>
