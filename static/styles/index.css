@@ -1,3 +1,11 @@
+section{
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 #intro-text{
     display: block;
     width: 75%;
@@ -14,39 +22,6 @@
     justify-content: center;
     margin-right: auto;
     margin-left: auto;
-}
-input.search{
-    border: none;
-    width:300px;
-    height: 45px;
-    border-radius: 50px;
-    border: solid 2px #5c64cb;
-    padding-left: 20px;
-    font-style: italic;
-    font-size: 16px;
-}
-
-.button{
-    border: none;
-    height: 45px;
-    width: 50px;
-    border-radius: 50%;
-    background-color: #5c64cb;
-    color: #f6f6f6;
-    font-weight: 600;
-    font-size: 16px;
-}
-
-.rando{
-    border: none;
-    height: 45px;
-    width: 90px;
-    border-radius: 40px;
-    background-color: #5c64cb;
-    color: #f6f6f6;
-    font-weight: 600;
-    font-size: 16px;
-    margin-left: 10px;
 }
 
 .carousel{
