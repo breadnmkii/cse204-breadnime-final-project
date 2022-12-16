@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: #f6f6f6;
+    color: rgb(30, 30, 30);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+section{
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+footer{
+    margin-top: 1em;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}

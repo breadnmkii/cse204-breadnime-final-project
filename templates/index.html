@@ -3,37 +3,57 @@
     <head>
         <meta charset="utf-8">
         <title>breadnime! - ad free anime</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../static/styles/index.css">
+        <link href="../static/styles/style.css" rel="stylesheet">
     </head>
     <body>
-
-        <nav>
-            <img src="" class="logo">
-            <ul id="nav-list" class="bar-container">
-                <li id="trending">Trending</li>
-                <li id="random">Random</li>
-                <li id="genre">Genres</li>
-            </ul>
-        </nav>
-
         <section>
             <div class="main-content">
+                <h3>Ad free anime, really!</h3>
                 <div class="search-wrapper">
-                    <img src="" class="logo">
                     <form id="search">
-                        <input type="text" placeholder="Search">
+                        <input type="text" placeholder="Search" class="search">
+                        <input type="submit" value="GO!" class="button">
                     </form>
                 </div>
-                <h3>Ad free anime, really!</h3>
+            </div>
+            <div id="intro-text">
+                <h5>
+                    Ads are bad.
+                    Fortunately, this website is here for you.
+                    Enjoy streaming thousands of anime to watch and click anywhere stress (crtl+w) free.
+                </h5>
             </div>
             <div class="sub-content">
-                <div id="carousel"></div>
-                <div id="intro-text">
-                    <h4>Ads — I get it</h4>
-                    <h5>
-                        We all hate them. Especially the ads that pop up most obtrusively and uninvited.
-                        Fortunately, this website is here for you.
-                        Enjoy streaming thousands of anime to watch and click anywhere stress (crtl+w) free.
-                    </h5>
+                <div class="carousel">
+                    <!-- Populate with jquery for popular anime -->
+                    <div class="carousel-item">
+                        <div class="mainview">
+                            <div class="img">
+                                <img src="https://i.pinimg.com/originals/4c/3d/14/4c3d14aac7a9ea327d0a080c8c2a1278.jpg">
+                            </div>
+                            <p>TITLE</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="mainview">
+                            <div class="img">
+                                <img src="https://i.pinimg.com/originals/4c/3d/14/4c3d14aac7a9ea327d0a080c8c2a1278.jpg">
+                            </div>
+                            <p>TITLE</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="mainview">
+                            <div class="img">
+                                <img src="https://i.pinimg.com/originals/4c/3d/14/4c3d14aac7a9ea327d0a080c8c2a1278.jpg">
+                            </div>
+                            <p>TITLE</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -47,5 +67,7 @@
         </footer>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../static/scripts/search.js"></script>
+        <script src="../static/scripts/view.js"></script>
     </body>
 </html>
