@@ -1,27 +1,11 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
-h3{
-    font-size: 50px;
-    font-weight: 500;
-    color: rgb(30, 30, 30);
-    text-align: center;
-}
-
-h5{
-    margin-top: 2em;
-    margin-bottom: 2em;
-    font-size: 16px;
-    font-weight: 400;
-}
-
-
 #intro-text{
+    display: block;
     width: 75%;
+    max-width: 600px;
     margin-right: auto;
     margin-left: auto;
+    margin-top: 2em;
+    margin-bottom: 2.5em;
 }
 
 .search-wrapper{
@@ -34,36 +18,46 @@ h5{
 input.search{
     border: none;
     width:300px;
-    height: 40px;
+    height: 45px;
     border-radius: 50px;
     border: solid 2px #5c64cb;
     padding-left: 20px;
-}
-
-.search::placeholder{
     font-style: italic;
+    font-size: 16px;
 }
-
 
 .button{
     border: none;
-    height: 40px;
-    width: 40px;
+    height: 45px;
+    width: 50px;
     border-radius: 50%;
     background-color: #5c64cb;
     color: #f6f6f6;
+    font-weight: 600;
+    font-size: 16px;
 }
 
+.rando{
+    border: none;
+    height: 45px;
+    width: 90px;
+    border-radius: 40px;
+    background-color: #5c64cb;
+    color: #f6f6f6;
+    font-weight: 600;
+    font-size: 16px;
+    margin-left: 10px;
+}
 
 .carousel{
     scroll-snap-type: x mandatory;
     overflow-x: scroll;
     display: flex;
     margin-bottom: 1em;
+    justify-content: center;
 }
 
 .carousel img{
-    box-shadow: -6px 7px 24px -1px rgba(0, 0, 0, 0.25);
     transition: 5s ease-in;
 }
 
