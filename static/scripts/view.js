@@ -43,12 +43,6 @@ var renderAPI = {
                 }
             }).appendTo('.gallery');
         }
-        /*
-        <div class="imggall">
-            <img src="https://i.pinimg.com/originals/4c/3d/14/4c3d14aac7a9ea327d0a080c8c2a1278.jpg">
-            <h4>TITLE</h4>
-        </div>
-        */
     },
     renderAnimeStream: function(data) {
         console.log("Rendering anime stream...");
@@ -56,15 +50,37 @@ var renderAPI = {
 
         let ani = JSON.parse(localStorage.getItem("openAnime"));
         let aniDetails = JSON.parse(localStorage.getItem("openAnimeDetails"));
+        const aniImg = aniDetails.animeImg
         const title = ani.animeTitle;
         const synopsis = aniDetails.synopsis;
-        const eps = aniDetails.episodesList;
+        let eps = aniDetails.episodesList;
 
         $('.title').text(title);
         $('#ani-description').text(synopsis);
+        $('#ani-image').attr("src", aniImg)
+        
+
+        let ep_count = 1;
+        eps = eps.reverse();
+        console.log(eps);
         for (let ep in eps) {
             let currEp = eps[ep];
-            console.log(currEp);
+            const streamingURL = `https://gogoanime.consumet.org/vidcdn/watch/${currEp.episodeId}`;
+            fetch(streamingURL)
+            .then((response) => response.json())
+            .then((data) => {
+                let buttEp = $('<button/>', {
+                    text: `${ep_count}`,
+                    id: `butt-${ep_count}`,
+                    click: (e) => {
+                        window.location.href = currEp.episodeUrl;
+                    },
+                });
+                buttEp.appendTo('.ep');
+                ++ep_count;
+            });
+
+            
         }
     }
 }
@@ -97,7 +113,8 @@ $('.sub-content button').click((e) => {
             $('.carousel').css("scroll-snap-type","x mandatory");
         }
     }, speed);
-})
+});
+
 
 /*
 <div class="carousel-item">

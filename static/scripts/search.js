@@ -44,7 +44,7 @@ let searchAPI = {
         if (animelist) {
             num_anime = Object.keys(animelist).length;
             console.log(animelist);
-            return animelist[Math.floor(Math.random() * num_anime)];
+            this.openAnime(animelist[Math.floor(Math.random() * num_anime)]);
         }
         return undefined;
     },
@@ -70,3 +70,6 @@ $('#search').submit(e => {
 });
 
 // Random anime handler
+$('.rando').click(() => {
+    searchAPI.getRandom();
+});

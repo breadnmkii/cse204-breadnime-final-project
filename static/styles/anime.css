@@ -7,7 +7,6 @@ video {
 .title {
     font-weight: 600;
     font-size: 30px;
-    margin-top: 1em;
     margin-bottom: 0.25em;
 }
 
@@ -40,6 +39,23 @@ button {
     font-size: 16px;
     margin-right: 1rem;
     margin-bottom: 1rem;
+}
+
+.main{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+.rightmain{
+    margin-left: 2rem;
+    
+}
+
+.main img{
+    height: 75vh;
 }
 
 /* .ep {
@@ -86,6 +102,18 @@ button {
         height: 40px;
         width: 55px;
         font-size: 14px;
+    }
+
+    .main{
+        flex-direction: column;
+    }
+
+    .rightmain{
+        margin-left: 0;
+    }
+
+    .title{
+        margin-top: 1em;
     }
 
 }
