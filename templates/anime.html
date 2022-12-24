@@ -33,8 +33,11 @@
 
     <section>
         <div class="main">
-            <img src="" alt="ani-image" id="ani-image">
+            <!-- <img src="" alt="ani-image" id="ani-image"> -->
             <div class="rightmain">
+                <video controls>
+                    <source src="https://cache.387e6278d8e06083d813358762e0ac63.com/6094627f-814f-11ed-941a-80615f0bcefe.m3u8?videoid=222962298918" type="video/mp4">
+                </video>
                 <p class="title">TITLE</p>
                 <p id="ani-description">
                     <!-- dynamic description from jquery -->
@@ -64,7 +67,7 @@
         // On page load render page
         $(document).ready(() => {
             // Render anime stream view
-            renderAPI.renderAnimeStream();
+            renderAPI.renderAnimePage();
         });
     </script>
 </body>

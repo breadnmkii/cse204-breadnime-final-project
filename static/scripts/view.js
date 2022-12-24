@@ -25,6 +25,10 @@ var renderAPI = {
 
     },
     renderAnimeGallery: function(data) {
+        if (!localStorage.getItem("searchName")) {
+            console.log("No anime searched!");
+            location.replace("index.html");
+        }
         console.log("Rendering anime gallery...");
         $('#result-header').text(`Search Results: ${localStorage.getItem("searchName")}`);
         for (let ani in data) {
@@ -44,8 +48,13 @@ var renderAPI = {
             }).appendTo('.gallery');
         }
     },
-    renderAnimeStream: function(data) {
-        console.log("Rendering anime stream...");
+    renderAnimePage: function(data) {
+        if (!localStorage.getItem("openAnime")) {
+            console.log("No anime opened!")
+            location.replace("index.html");
+        }
+
+        console.log("Rendering anime page...");
         console.log(localStorage.getItem("openAnime"));
 
         let ani = JSON.parse(localStorage.getItem("openAnime"));
@@ -59,29 +68,27 @@ var renderAPI = {
         $('#ani-description').text(synopsis);
         $('#ani-image').attr("src", aniImg)
         
-
-        let ep_count = 1;
-        eps = eps.reverse();
-        console.log(eps);
         for (let ep in eps) {
             let currEp = eps[ep];
-            const streamingURL = `https://gogoanime.consumet.org/vidcdn/watch/${currEp.episodeId}`;
+            let buttEp = $('<button/>', {
+                text: `${currEp.episodeNum}`,
+                id: `${currEp.episodeId}`,
+                click: (e) => {
+                    alert("calling renderAnimeStream with episode id" + currEp.episodeId);
+                },
+            });
+            buttEp.prependTo('.ep');
+        }
+    },
+    renderAnimeStream: function(episodeId) {
+        // TODO: implement cosumnet API for better streaming
+        // https://docs.consumet.org/#tag/gogoanime/operation/getRecentEpisodes
+        const streamingURL = `https://api.consumet.org/anime/gogoanime/watch/${episodeId}`;
             fetch(streamingURL)
             .then((response) => response.json())
             .then((data) => {
-                let buttEp = $('<button/>', {
-                    text: `${ep_count}`,
-                    id: `butt-${ep_count}`,
-                    click: (e) => {
-                        window.location.href = currEp.episodeUrl;
-                    },
-                });
-                buttEp.appendTo('.ep');
-                ++ep_count;
+                
             });
-
-            
-        }
     }
 }
 
