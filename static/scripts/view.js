@@ -129,8 +129,8 @@ $('.sub-content button').click((e) => {
 
     let item_width = $('.carousel-item').width() + 44;
 
-    step = 2;
-    speed = 5;
+    step = 15;
+    speed = 1;
     scrollAmount = 0;
     var scrollTimer = setInterval(function(){
         let currScroll = $('.carousel').scrollLeft();
