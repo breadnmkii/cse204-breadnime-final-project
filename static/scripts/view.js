@@ -73,22 +73,49 @@ var renderAPI = {
             let buttEp = $('<button/>', {
                 text: `${currEp.episodeNum}`,
                 id: `${currEp.episodeId}`,
-                click: (e) => {
-                    alert("calling renderAnimeStream with episode id" + currEp.episodeId);
+                click: _ => {
+                    this.renderAnimeStream(currEp.episodeId);
                 },
             });
             buttEp.prependTo('.ep');
         }
     },
-    renderAnimeStream: function(episodeId) {
-        // TODO: implement cosumnet API for better streaming
+    renderAnimeStream: function(episodeId, quality="default") {
         // https://docs.consumet.org/#tag/gogoanime/operation/getRecentEpisodes
-        const streamingURL = `https://api.consumet.org/anime/gogoanime/watch/${episodeId}`;
-            fetch(streamingURL)
-            .then((response) => response.json())
-            .then((data) => {
-                
-            });
+        let stream_obj = $('#stream-source');
+        let video = document.getElementById('hls-video');
+        // check cache
+        if (localStorage.getItem(episodeId)) {
+            let data = JSON.parse(localStorage.getItem(episodeId));
+            for (src in data.sources) {
+                if (data.sources[src].quality == quality) {
+                    stream_obj.attr("src", data.sources[src].url);
+                    video.load();
+                    video.play();
+                    return true;
+                }
+            }
+            console.error("Could not find stream of specified quality, using lowest...");
+            stream_obj.attr("src", data.sources[0].url);
+            return false;
+        }
+        else {
+            const streamingURL = `https://api.consumet.org/anime/gogoanime/watch/${episodeId}`;
+                fetch(streamingURL)
+                .then((response) => response.json())
+                .then((data) => {
+                    localStorage.setItem(episodeId, JSON.stringify(data));
+                    for (src in data.sources) {
+                        if (data.sources[src].quality == quality) {
+                            stream_obj.attr("src", data.sources[src].url);
+                            return true;
+                        }
+                    }
+                    console.error("Could not find stream of specified quality, using lowest...");
+                    stream_obj.attr("src", data.sources[0].url);
+                    return false;
+                });
+        }
     }
 }
 
