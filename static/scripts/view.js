@@ -5,7 +5,6 @@ var renderAPI = {
         let data = await searchAPI.getPopular();
         console.log("Rendering trending carousel...");
         for (let ani in data) {
-            console.log(data[ani]);
             let currAni = data[ani];
             $('<div/>', {
                 class: "carousel-item",
@@ -33,7 +32,6 @@ var renderAPI = {
         console.log("Rendering anime gallery...");
         $('#result-header').text(`Search Results: ${localStorage.getItem("searchName")}`);
         for (let ani in data) {
-            console.log(data[ani]);
             let currAni = data[ani];
             $('<div/>', {
                 class: "imggall",
@@ -56,7 +54,6 @@ var renderAPI = {
         }
 
         console.log("Rendering anime page...");
-        console.log(localStorage.getItem("openAnime"));
 
         let ani = JSON.parse(localStorage.getItem("openAnime"));
         let aniDetails = JSON.parse(localStorage.getItem("openAnimeDetails"));
@@ -82,8 +79,7 @@ var renderAPI = {
         }
     },
     renderAnimeStream: async function(episodeId, quality="default") {
-        let video = document.getElementById('hls-video');
-        let stream_obj = $('#stream-source');
+        let video = videojs('hls-video');
         let url;
 
         // check cache
@@ -91,17 +87,19 @@ var renderAPI = {
             console.log("using video cache...");
             url = localStorage.getItem(episodeId);
             console.log(url);
-            stream_obj.attr("src", url);
-            video.load();
-            video.play();
+            video.src({
+                src: url,
+                type: 'application/x-mpegURL'
+            });
             return true;
         }
 
         url = await searchAPI.getAnimeStreamingURL(episodeId, quality);
         localStorage.setItem(episodeId, url);
-        stream_obj.attr("src", url);
-        video.load();
-        video.play();
+        video.src({
+            src: url,
+            type: 'application/x-mpegURL'
+        });
         return true;
     }
 }
@@ -120,7 +118,6 @@ $('.sub-content button').click((e) => {
     scrollAmount = 0;
     var scrollTimer = setInterval(function(){
         let currScroll = $('.carousel').scrollLeft();
-        console.log(scrollAmount);
         if(e.target.id === "left-carousel"){
             $('.carousel').scrollLeft(currScroll -= step);
         } else {

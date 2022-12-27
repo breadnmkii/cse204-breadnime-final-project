@@ -45,7 +45,6 @@ let searchAPI = {
         animelist = this.getPopular();
         if (animelist) {
             num_anime = Object.keys(animelist).length;
-            console.log(animelist);
             this.openAnime(animelist[Math.floor(Math.random() * num_anime)]);
         }
         return undefined;
@@ -54,7 +53,6 @@ let searchAPI = {
         let animeDetails_res = fetch(`https://gogoanime.consumet.org/anime-details/${animeID}`)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
             return data;
         });
         
