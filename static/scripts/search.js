@@ -11,7 +11,7 @@ let searchAPI = {
         .then((animelist) => {
             console.log("Searching anime...");
             localStorage.setItem("searchAnime", JSON.stringify(animelist));
-            window.location.href = "gallery.html";
+            window.location.href = "templates/gallery.html";
         });
     },
     openAnime: async function(data) {    // Function for redirecting to specific anime JSON object
@@ -19,7 +19,7 @@ let searchAPI = {
         let animeDetails = await this.getAnimeDetails(data.animeId);
         localStorage.setItem("openAnime", JSON.stringify(data));
         localStorage.setItem("openAnimeDetails", JSON.stringify(animeDetails));
-        window.location.href = "anime.html"
+        window.location.href = "templates/anime.html"
     },
     getSearchAnime: function() {    // Function for getting searched anime data
         data = localStorage.getItem("searchAnime");
@@ -28,16 +28,18 @@ let searchAPI = {
         }
         return data;
     },
-    getPopular: function() {
-        data = localStorage.getItem("popularAnime");
-        if (data === null) {
-            fetch("https://gogoanime.consumet.org/popular")
-            .then((response) => response.json())
-            .then((animelist) => {
-                localStorage.setItem("popularAnime", JSON.stringify(animelist));
-            });
+    getPopular: async function() {
+        if (localStorage.getItem("popularAnime")) {
+            return JSON.parse(localStorage.getItem("popularAnime"));
         }
-        return JSON.parse(data);
+        let data = fetch("https://gogoanime.consumet.org/popular")
+        .then((response) => response.json())
+        .then((data) => {
+            localStorage.setItem("popularAnime", JSON.stringify(data));
+            return data;
+        });
+        
+        return data;
     },
     getRandom: function() {
         animelist = this.getPopular();

@@ -52,13 +52,9 @@
         <script src="../static/scripts/search.js"></script>
         <script src="../static/scripts/view.js"></script>
         <script>
-            // On page load get popular anime
+            // On page load render carousel
             $(document).ready(() => {
-                // Initialize popular anime
-                searchAPI.getPopular();
-
-                // Render dynamic views
-                renderAPI.renderTrendingCarousel(searchAPI.getPopular());
+                renderAPI.renderTrendingCarousel();
             });
         </script>
     </body>
