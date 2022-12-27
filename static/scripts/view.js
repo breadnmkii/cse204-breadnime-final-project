@@ -81,45 +81,30 @@ var renderAPI = {
             buttEp.prependTo('.ep');
         }
     },
-    renderAnimeStream: function(episodeId, quality="default") {
-        // https://docs.consumet.org/#tag/gogoanime/operation/getRecentEpisodes
-        let stream_obj = $('#stream-source');
+    renderAnimeStream: async function(episodeId, quality="default") {
         let video = document.getElementById('hls-video');
+        let stream_obj = $('#stream-source');
+        let url;
+
         // check cache
         if (localStorage.getItem(episodeId)) {
-            let data = JSON.parse(localStorage.getItem(episodeId));
-            for (src in data.sources) {
-                if (data.sources[src].quality == quality) {
-                    stream_obj.attr("src", data.sources[src].url);
-                    video.load();
-                    video.play();
-                    return true;
-                }
-            }
-            console.error("Could not find stream of specified quality, using lowest...");
-            stream_obj.attr("src", data.sources[0].url);
-            return false;
+            console.log("using video cache...");
+            url = localStorage.getItem(episodeId);
+            console.log(url);
+            stream_obj.attr("src", url);
+            video.load();
+            video.play();
+            return true;
         }
-        else {
-            const streamingURL = `https://api.consumet.org/anime/gogoanime/watch/${episodeId}`;
-                fetch(streamingURL)
-                .then((response) => response.json())
-                .then((data) => {
-                    localStorage.setItem(episodeId, JSON.stringify(data));
-                    for (src in data.sources) {
-                        if (data.sources[src].quality == quality) {
-                            stream_obj.attr("src", data.sources[src].url);
-                            return true;
-                        }
-                    }
-                    console.error("Could not find stream of specified quality, using lowest...");
-                    stream_obj.attr("src", data.sources[0].url);
-                    return false;
-                });
-        }
+
+        url = await searchAPI.getAnimeStreamingURL(episodeId, quality);
+        localStorage.setItem(episodeId, url);
+        stream_obj.attr("src", url);
+        video.load();
+        video.play();
+        return true;
     }
 }
-
 
 /* Event listeners */
 // Listener for carousel button interaction

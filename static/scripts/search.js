@@ -11,7 +11,7 @@ let searchAPI = {
         .then((animelist) => {
             console.log("Searching anime...");
             localStorage.setItem("searchAnime", JSON.stringify(animelist));
-            window.location.href = "templates/gallery.html";
+            window.location.href = "gallery.html";
         });
     },
     openAnime: async function(data) {    // Function for redirecting to specific anime JSON object
@@ -19,7 +19,7 @@ let searchAPI = {
         let animeDetails = await this.getAnimeDetails(data.animeId);
         localStorage.setItem("openAnime", JSON.stringify(data));
         localStorage.setItem("openAnimeDetails", JSON.stringify(animeDetails));
-        window.location.href = "templates/anime.html"
+        window.location.href = "anime.html"
     },
     getSearchAnime: function() {    // Function for getting searched anime data
         data = localStorage.getItem("searchAnime");
@@ -59,6 +59,21 @@ let searchAPI = {
         });
         
         return animeDetails_res;
+    },
+    getAnimeStreamingURL: async function(episodeId, quality) {
+        const streamingURL = `https://api.consumet.org/anime/gogoanime/watch/${episodeId}`;
+        let streamingURL_res = fetch(streamingURL)
+        .then((response) => response.json())
+        .then((data) => {
+            for (src in data.sources) {
+                if (data.sources[src].quality == quality) {
+                    return data.sources[0].url;
+                }
+            }
+            console.error("Could not find stream of specified quality, using lowest...");
+            return data.sources[0].url;
+        });
+        return streamingURL_res;
     },
 }
 
