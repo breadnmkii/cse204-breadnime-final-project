@@ -63,13 +63,18 @@ let searchAPI = {
         let streamingURL_res = fetch(streamingURL)
         .then((response) => response.json())
         .then((data) => {
-            for (src in data.sources) {
-                if (data.sources[src].quality == quality) {
-                    return data.sources[0].url;
-                }
-            }
-            console.error("Could not find stream of specified quality, using lowest...");
-            return data.sources[0].url;
+
+            // Use best available quality
+            return data.sources[data.sources.length-3].url;
+
+
+            // for (src in data.sources) {
+            //     if (data.sources[src].quality == quality) {
+            //         return data.sources[src].url;
+            //     }
+            // }
+            // console.error("Could not find stream of specified quality, using default...");
+            // return data.sources[data.sources.length-2].url;
         });
         return streamingURL_res;
     },
