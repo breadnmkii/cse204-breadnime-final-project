@@ -60,14 +60,22 @@ var renderAPI = {
         const aniImg = aniDetails.animeImg
         const title = ani.animeTitle;
         const synopsis = aniDetails.synopsis;
-        let eps = aniDetails.episodesList;
+        let eps = aniDetails.episodesList.reverse();
 
         $('.title').text(title);
         $('#ani-description').text(synopsis);
         $('#ani-image').attr("src", aniImg)
-        
+
+
+        // Load Buttons with anime streams
         for (let ep in eps) {
             let currEp = eps[ep];
+
+            // Load first episode
+            if (ep == 0) {
+                this.renderAnimeStream(currEp.episodeId);
+            }
+            
             let buttEp = $('<button/>', {
                 text: `${currEp.episodeNum}`,
                 id: `${currEp.episodeId}`,
@@ -75,7 +83,7 @@ var renderAPI = {
                     this.renderAnimeStream(currEp.episodeId);
                 },
             });
-            buttEp.prependTo('.ep');
+            buttEp.appendTo('.ep');
         }
     },
     renderAnimeStream: async function(episodeId, quality="default") {
