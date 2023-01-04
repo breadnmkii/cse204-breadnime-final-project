@@ -65,7 +65,9 @@ let searchAPI = {
         .then((data) => {
 
             // Use best available quality
-            let url = data.sources[0].url;
+            console.log("streaming urls");
+            console.log(data.sources);
+            let url = data.sources[data.sources.length - 3].url;
             return url;
 
         });
