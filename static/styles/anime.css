@@ -16,12 +16,11 @@ p {
     margin-bottom: 2em;
 }
 
-button.active {
-    border: none;
+button:active {
     height: 45px;
     width: 60px;
     border-radius: 50px;
-    background-color: #5c64cb;
+    background-color: #5c67ff;
     color: #f6f6f6;
     font-weight: 600;
     font-size: 16px;
@@ -34,6 +33,7 @@ button {
     width: 60px;
     border-radius: 50px;
     border: solid 2px #5c64cb;
+    background-color: #f6f6f6;
     color: #5c64cb;
     font-weight: 600;
     font-size: 16px;

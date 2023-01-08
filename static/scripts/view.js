@@ -79,8 +79,9 @@ var renderAPI = {
             let buttEp = $('<button/>', {
                 text: `${currEp.episodeNum}`,
                 id: `${currEp.episodeId}`,
-                click: _ => {
+                click: e => {
                     this.renderAnimeStream(currEp.episodeId);
+                    $(e.target).css({'background-color':'lightgray'});
                 },
             });
             buttEp.appendTo('.ep');
