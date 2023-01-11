@@ -91,10 +91,12 @@ var renderAPI = {
         let video = videojs('hls-video');
         let url;
 
+        let videoCache_id = episodeId + `-quality:${quality}`;
+
         // check cache
-        if (localStorage.getItem(episodeId)) {
-            console.log("using video cache...");
-            url = localStorage.getItem(episodeId);
+        if (localStorage.getItem(videoCache_id)) {
+            console.log(`using video cache id: ${videoCache_id}`);
+            url = localStorage.getItem(videoCache_id);
             console.log(url);
             video.src({
                 src: url,
@@ -104,7 +106,8 @@ var renderAPI = {
         }
 
         url = await searchAPI.getAnimeStreamingURL(episodeId, quality);
-        localStorage.setItem(episodeId, url);
+        localStorage.setItem(videoCache_id, url);
+        console.log(url);
         video.src({
             src: url,
             type: 'application/x-mpegURL'

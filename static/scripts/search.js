@@ -58,17 +58,22 @@ let searchAPI = {
         
         return animeDetails_res;
     },
-    getAnimeStreamingURL: async function(episodeId) {
+    getAnimeStreamingURL: async function(episodeId, quality) {
         const streamingURL = `https://api.consumet.org/anime/gogoanime/watch/${episodeId}`;
         let streamingURL_res = fetch(streamingURL)
         .then((response) => response.json())
         .then((data) => {
 
-            // Use best available quality
             console.log("streaming urls");
             console.log(data.sources);
-            let url = data.sources[data.sources.length - 3].url;
-            return url;
+            for (obj in data.sources) {
+                if (data.sources[obj].quality == quality) {
+                    return data.sources[obj].url;
+                }
+            }
+            
+            // use backup if no quality found
+            return url = data.sources[data.sources.length - 1].url;
 
         });
         return streamingURL_res;
