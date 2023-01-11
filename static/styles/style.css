@@ -54,6 +54,17 @@ nav img {
     width: 50px;
 }
 
+#main-logo {
+    display: flex;
+    justify-content:left;
+    align-items:baseline;
+
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.5em;
+    color:#5c64cb;
+    text-decoration: none;
+}
+
 input.search {
     border: none;
     width: 300px;

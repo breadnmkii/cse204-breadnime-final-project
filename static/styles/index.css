@@ -6,12 +6,16 @@ section{
     flex-direction: column;
 }
 
+#main-logo {
+    width: 25%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .logo{
     width: 30%;
     max-width: 100px;
     display: block;
-    margin-right: auto;
-    margin-left: auto;
     margin-bottom: 1em;
 }
 
