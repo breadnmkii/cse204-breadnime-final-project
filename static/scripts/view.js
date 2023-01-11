@@ -47,7 +47,7 @@ var renderAPI = {
             }).appendTo('.gallery');
         }
     },
-    renderAnimePage: function(data) {
+    renderAnimePage: async function(data) {
         if (!localStorage.getItem("openAnime")) {
             console.log("No anime opened!")
             location.replace("/templates/index.html");
@@ -64,34 +64,86 @@ var renderAPI = {
 
         $('.title').text(title);
         $('#ani-description').text(synopsis);
-        $('#ani-image').attr("src", aniImg)
+        $('#ani-image').attr("src", aniImg);
 
+        // Load streaming qualities buttons with first episode qualities
+        if (eps.length) {
+            let aniSrcs = await searchAPI.getAnimeStreamingSRCS(eps[0].episodeId);
+            for (src in aniSrcs) {
+                let currSrc = aniSrcs[src];
 
-        // Load Buttons with anime streams
+                let buttQol = $('<button/>', {
+                    text: `${currSrc.quality}`,
+                    id: `${currSrc.quality}`,
+                    click: e => {
+                        // Set global video quality
+                        localStorage.setItem("videoQuality", e.target.id);
+                        console.log(`Switched quality to ${e.target.id}`);
+
+                        // Clear other selected button
+                        if (document.querySelector(".quality .selected-button")) {
+                            $(document.querySelector(".quality .selected-button")).removeClass("selected-button");
+                        }
+
+                        // Set target as selected button
+                        $(e.target).addClass("selected-button");
+
+                        // Render updated quality stream
+                        this.renderAnimeStream($('.ep .selected-button').attr('id'));
+                    },
+                });
+
+                // Set default video quality to default
+                if (currSrc.quality == "default") {
+                    localStorage.setItem("videoQuality", "default");
+                    buttQol.addClass('selected-button');
+                }
+
+                buttQol.appendTo('.quality');
+            }
+        }
+        console.log(aniDetails);
+
+        // Load episode list buttons with anime streams
         for (let ep in eps) {
             let currEp = eps[ep];
-
-            // Load first episode
-            if (ep == 0) {
-                this.renderAnimeStream(currEp.episodeId);
-            }
             
             let buttEp = $('<button/>', {
                 text: `${currEp.episodeNum}`,
                 id: `${currEp.episodeId}`,
                 click: e => {
                     this.renderAnimeStream(currEp.episodeId);
-                    $(e.target).css({'background-color':'lightgray'});
+
+                    // Mark button as visited
+                    $(e.target).addClass("visited-button");
+
+                    // Clear other selected button
+                    if (document.querySelector(".ep .selected-button")) {
+                        $(document.querySelector(".ep .selected-button")).removeClass("selected-button");
+                    }
+
+                    // Set target as selected button
+                    $(e.target).addClass("selected-button");
                 },
             });
+
+             // Render first episode on default
+             if (ep == 0) {
+                this.renderAnimeStream(currEp.episodeId);
+                buttEp.addClass('selected-button');
+                buttEp.addClass('visited-button');
+            }
+
             buttEp.appendTo('.ep');
         }
     },
-    renderAnimeStream: async function(episodeId, quality="default") {
-        let video = videojs('hls-video');
-        let url;
+    renderAnimeStream: async function(episodeId) {
+        // check which global video quality to use
+        let quality = localStorage.getItem("videoQuality");
 
         let videoCache_id = episodeId + `-quality:${quality}`;
+        let video = videojs('hls-video');
+        let url;
 
         // check cache
         if (localStorage.getItem(videoCache_id)) {
@@ -105,9 +157,23 @@ var renderAPI = {
             return true;
         }
 
-        url = await searchAPI.getAnimeStreamingURL(episodeId, quality);
-        localStorage.setItem(videoCache_id, url);
+        // load sources
+        let didFindQuality = false;
+        srcs = await searchAPI.getAnimeStreamingSRCS(episodeId);
+
+        for (src in srcs) {
+            if (srcs[src].quality == quality) {
+                url = srcs[src].url;
+                didFindQuality = true;
+            }
+        }
+        // use backup if no matching quality found
+        if (!didFindQuality) {
+            url = srcs[srcs.length - 1].url;
+        }
+
         console.log(url);
+        localStorage.setItem(videoCache_id, url);
         video.src({
             src: url,
             type: 'application/x-mpegURL'

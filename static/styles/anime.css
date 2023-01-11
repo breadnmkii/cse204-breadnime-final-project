@@ -16,18 +16,6 @@ p {
     margin-bottom: 2em;
 }
 
-button:active {
-    height: 45px;
-    width: 60px;
-    border-radius: 50px;
-    background-color: #5c67ff;
-    color: #f6f6f6;
-    font-weight: 600;
-    font-size: 16px;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-}
-
 button {
     height: 45px;
     width: 60px;
@@ -39,6 +27,42 @@ button {
     font-size: 16px;
     margin-right: 1rem;
     margin-bottom: 1rem;
+}
+
+button:active {
+    height: 45px;
+    width: 60px;
+    border-radius: 50px;
+    background-color: #5c67ff !important;
+    color: #f6f6f6;
+    font-weight: 600;
+    font-size: 16px;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+button:hover {
+    background-color:#ced2ff;
+}
+
+.visited-button {
+    background-color:#ced2ff;
+    color: #5c64cb;
+}
+
+.selected-button {
+    background-color:#5c67ff !important;
+    color: white !important;
+}
+
+.quality {
+    margin-top: 1rem;
+}
+
+.quality > button {
+    border-radius: 0;
+    margin-bottom: 0;
+    width: 70px;
 }
 
 .main{
