@@ -16,6 +16,42 @@ p {
     margin-bottom: 2em;
 }
 
+#ani-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
+#ani-stats > * {
+    padding: 5px;
+}
+
+.genre {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.genre > div {
+    margin: 0px 5px 0px 5px;
+    padding: 0px 5px 0px 3px;
+
+    background-color: #5c64cb;
+    color: white;
+    font-size: 0.75em;
+
+    border-style: solid;
+    border-color:#5c64cb;
+    border-radius: 25px;
+    border-width: 2px;
+
+}
+
+.genre > div:hover {
+    cursor: pointer;
+}
+
 button {
     height: 45px;
     width: 60px;
@@ -43,6 +79,7 @@ button:active {
 
 button:hover {
     background-color:#ced2ff;
+    cursor: pointer;
 }
 
 .visited-button {

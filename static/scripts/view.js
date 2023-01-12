@@ -62,9 +62,27 @@ var renderAPI = {
         const synopsis = aniDetails.synopsis;
         let eps = aniDetails.episodesList.reverse();
 
+        // Load anime details and stats
         $('.title').text(title);
         $('#ani-description').text(synopsis);
         $('#ani-image').attr("src", aniImg);
+        $('#ani-released').text(`Released: ${aniDetails.releasedDate}`);
+        $('#ani-status').text(`Status: ${aniDetails.status}`);
+
+        for (genre in aniDetails.genres) {
+            let currGenre = aniDetails.genres[genre];
+            let genreTag = $('<div/>', {
+                text: `#${currGenre}`,
+                id: `${currGenre}`,
+                click: e => {
+                    // TODO: implement genre search gallery
+                    console.log("TODO: opening genre gallery...");
+                }
+            });
+            genreTag.appendTo('.genre');
+        }
+
+        
 
         // Load streaming qualities buttons with first episode qualities
         if (eps.length) {
@@ -102,7 +120,6 @@ var renderAPI = {
                 buttQol.appendTo('.quality');
             }
         }
-        console.log(aniDetails);
 
         // Load episode list buttons with anime streams
         for (let ep in eps) {

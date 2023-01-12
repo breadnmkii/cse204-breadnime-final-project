@@ -62,8 +62,8 @@ let searchAPI = {
         let streamingSRCS_res = fetch(streamingSRCS)
         .then((response) => response.json())
         .then((data) => {
-            console.log("streaming sources");
-            console.log(data.sources);
+            // console.log("streaming sources");
+            // console.log(data.sources);
             return data.sources;
         });
         return streamingSRCS_res;
