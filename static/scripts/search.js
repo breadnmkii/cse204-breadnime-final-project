@@ -41,13 +41,12 @@ let searchAPI = {
         
         return data;
     },
-    getRandom: function() {
-        animelist = this.getPopular();
+    getRandom: async function() {
+        animelist = await this.getPopular();
         if (animelist) {
             num_anime = Object.keys(animelist).length;
             this.openAnime(animelist[Math.floor(Math.random() * num_anime)]);
         }
-        return undefined;
     },
     getAnimeDetails: async function(animeID) {
         let animeDetails_res = fetch(`https://gogoanime.consumet.org/anime-details/${animeID}`)
