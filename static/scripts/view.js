@@ -163,6 +163,7 @@ var renderAPI = {
         let url;
 
         // check cache
+        /* screw this cache cause current vidcdn stream doesnt support qualities
         if (localStorage.getItem(videoCache_id)) {
             console.log(`using video cache id: ${videoCache_id}`);
             url = localStorage.getItem(videoCache_id);
@@ -173,6 +174,7 @@ var renderAPI = {
             });
             return true;
         }
+        */
 
         // load sources
         let didFindQuality = false;
@@ -180,15 +182,16 @@ var renderAPI = {
 
         for (src in srcs) {
             if (srcs[src].quality == quality) {
-                url = srcs[src].url;
+                url = srcs[src].file;
                 didFindQuality = true;
             }
         }
         // use backup if no matching quality found
         if (!didFindQuality) {
-            url = srcs[srcs.length - 1].url;
+            url = srcs[srcs.length - 1].file;
         }
 
+        console.log(`Loaded stream with url ${url}`)
         console.log(url);
         localStorage.setItem(videoCache_id, url);
         video.src({

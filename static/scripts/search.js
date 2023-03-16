@@ -2,11 +2,12 @@
 // the GoGoAnime API
 
 // Note: Use localstorage to cache anime results
+const API_ENDPOINT = "gogoanime.consumet.stream"
 
 // Collections of GoGoAnime API functionality for searching anime
 let searchAPI = { 
     searchAnime: function(searchTerms) {    // Function for redirecting on anime search
-        fetch(`https://gogoanime.consumet.org/search?keyw=${searchTerms}`)
+        fetch(`https://${API_ENDPOINT}/search?keyw=${searchTerms}`)
         .then((response) => response.json())
         .then((animelist) => {
             console.log("Searching anime...");
@@ -32,7 +33,7 @@ let searchAPI = {
         if (localStorage.getItem("popularAnime")) {
             return JSON.parse(localStorage.getItem("popularAnime"));
         }
-        let data = fetch("https://gogoanime.consumet.org/popular")
+        let data = fetch(`https://${API_ENDPOINT}/popular`)
         .then((response) => response.json())
         .then((data) => {
             localStorage.setItem("popularAnime", JSON.stringify(data));
@@ -49,7 +50,7 @@ let searchAPI = {
         }
     },
     getAnimeDetails: async function(animeID) {
-        let animeDetails_res = fetch(`https://gogoanime.consumet.org/anime-details/${animeID}`)
+        let animeDetails_res = fetch(`https://${API_ENDPOINT}/anime-details/${animeID}`)
         .then((response) => response.json())
         .then((data) => {
             return data;
@@ -58,12 +59,12 @@ let searchAPI = {
         return animeDetails_res;
     },
     getAnimeStreamingSRCS: async function(episodeId) {
-        const streamingSRCS = `https://api.consumet.org/anime/gogoanime/watch/${episodeId}`;
+        const streamingSRCS = `https://${API_ENDPOINT}/vidcdn/watch/${episodeId}`;      // switched to vidcdn streaming...now when will this break again??
         let streamingSRCS_res = fetch(streamingSRCS)
         .then((response) => response.json())
         .then((data) => {
-            // console.log("streaming sources");
-            // console.log(data.sources);
+            console.log("streaming sources");
+            console.log(data.sources);
             return data.sources;
         });
         return streamingSRCS_res;
