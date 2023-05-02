@@ -27,7 +27,7 @@ var renderAPI = {
     renderAnimeGallery: function(data) {
         if (!localStorage.getItem("searchName")) {
             console.log("No anime searched!");
-            location.replace("/templates/index.html");
+            location.replace("/index.html");
         }
         console.log("Rendering anime gallery...");
         $('#result-header').text(`Search Results: ${localStorage.getItem("searchName")}`);
@@ -50,7 +50,7 @@ var renderAPI = {
     renderAnimePage: async function(data) {
         if (!localStorage.getItem("openAnime")) {
             console.log("No anime opened!")
-            location.replace("/templates/index.html");
+            location.replace("/index.html");
         }
 
         console.log("Rendering anime page...");
