@@ -7,12 +7,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const express_session_1 = __importDefault(require("express-session"));
 const session_file_store_1 = __importDefault(require("session-file-store"));
-const extensions_1 = require("@consumet/extensions");
-const API_ENDPOINT = new extensions_1.ANIME.Gogoanime();
-const results = API_ENDPOINT.search("One Piece").then(data => {
-    // print results
-    console.log(data);
-});
+// DEBUG: custon .d.ts file in custom_types not working? specified typeRoots dir in tsconfig??
+// declare module 'express-session' {
+//     export interface SessionData {
+//         user: string;
+//     }
+// }
 // App setup
 const app = (0, express_1.default)();
 const port = 3000;
@@ -41,4 +41,8 @@ app.use(express_1.default.static('views'));
 // Listen for connections
 app.listen(port, () => {
     console.log("Server listening on port 3000");
+});
+// test
+app.use((req, res, next) => {
+    console.log(`HTTP request made to server at time: ${Date.now()}`);
 });

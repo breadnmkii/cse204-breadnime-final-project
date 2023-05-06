@@ -1,1 +1,0 @@
-// Controller endpoint responsible for rendering webpage views
