@@ -8,54 +8,62 @@ import { ANIME } from '@consumet/extensions'
 const API_PROVIDER = new ANIME.Gogoanime();
 
 // Function returning JSON data on anime searched by keywords
-// NOTE: may have to be async...?
-export function getSearch(req: Request, res: Response, next: Function) {
-    const searchTerms = 'one piece';    // DEBUG: how to obtain searchterms from http req? GET params?
-    const result = API_PROVIDER.search(searchTerms)
+export async function getSearch(req: Request, res: Response, next: Function) {
+    const searchTerms = String(req.query.search || "");
+    const result = await API_PROVIDER.search(searchTerms)
     .then(data => {
-        console.log(`Search data for ${searchTerms}`);
-        console.log(data);
+        console.log(`Fetched search data for ${searchTerms}`);
+        // console.log(data);
         return data;
     });
 
     // Pass data to view renderer...
     res.locals.data = result;
     next();
-    
 }
 
 // Function for returning JSON data specific to anime ID
-export function getAnime(animeID: string) {
-    const result = API_PROVIDER.fetchAnimeInfo(animeID)
+export async function getAnime(req: Request, res: Response, next: Function) {
+    const animeID = String(req.query.animeid || "");
+    const result = await API_PROVIDER.fetchAnimeInfo(animeID)
     .then(data => {
-        console.log(`Anime detail for ${animeID}`);
-        console.log(data);
+        console.log(`Fetched anime detail for ${animeID}`);
+        // console.log(data);
         return data;
     });
 
-    return result;
+    res.locals.data_anime = result;
+    next();
 }
 
 // Function for returning M3U8 streaming URLs of specific episode ID
-export function getEpisodeStreams(episodeID: string) {
-    const result = API_PROVIDER.fetchEpisodeSources(episodeID)
+export async function getEpisodeStreams(req: Request, res: Response, next: Function) {
+    const episodeID = String(req.query.episodeid || "");
+    const result = await API_PROVIDER.fetchEpisodeSources(episodeID)
     .then(data => {
-        console.log(`Stream sources for ${episodeID}`);
-        console.log(data);
+        console.log(`Fetched stream sources for ${episodeID}`);
+        // console.log(data);
         return data;
+    })
+    .catch(err => {
+        res.locals.data_episode = {};
+        console.log(err);
+        next();
     });
 
-    return result;
+    res.locals.data_episode = result;
+    next();
 }
 
 // Function returning JSON data on current popular anime
-export function getPopular() {
-    const result = API_PROVIDER.fetchTopAiring()
+export async function getPopular(req: Request, res: Response, next: Function) {
+    const result = await API_PROVIDER.fetchTopAiring()
     .then(data => {
-        console.log(`Top airing detail`);
-        console.log(data);
+        console.log(`Fetched top airing detail`);
+        // console.log(data);
         return data;
     });
 
-    return result;
+    res.locals.data = result;
+    next();
 }
