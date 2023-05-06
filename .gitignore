@@ -2,3 +2,5 @@
 *.log
 node_modules/
 sessions/
+*.js
+!javascripts/
