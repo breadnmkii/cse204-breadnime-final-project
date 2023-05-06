@@ -3,4 +3,4 @@
 node_modules/
 sessions/
 *.js
-!javascripts/
+!*/javascripts/*.js
